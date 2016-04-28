@@ -403,7 +403,8 @@ void screens::updateScreenSaver(char active_receiver, uint8_t rssi, uint8_t rssi
 #ifdef USE_DIVERSITY
     if(isDiversity()) {
         // read rssi A
-        #define RSSI_BAR_SIZE 119
+        //#define RSSI_BAR_SIZE 119
+        uint8_t RSSI_BAR_SIZE=119;
         uint8_t rssi_scaled=map(rssiA, 1, 100, 3, RSSI_BAR_SIZE);
         display.fillRect(7 + rssi_scaled, display.height()-19, (RSSI_BAR_SIZE-rssi_scaled), 9, BLACK);
         if(active_receiver == useReceiverA)
@@ -434,7 +435,8 @@ void screens::updateScreenSaver(char active_receiver, uint8_t rssi, uint8_t rssi
         display.fillRect(0, display.height()-19, 25, 19, WHITE);
         display.setCursor(1,display.height()-13);
         display.print(PSTR2("RSSI"));
-        #define RSSI_BAR_SIZE 101
+        //#define RSSI_BAR_SIZE 101
+        uint8_t RSSI_BAR_SIZE=101
         uint8_t rssi_scaled=map(rssi, 1, 100, 1, RSSI_BAR_SIZE);
         display.fillRect(25 + rssi_scaled, display.height()-19, (RSSI_BAR_SIZE-rssi_scaled), 19, BLACK);
         display.fillRect(25, display.height()-19, rssi_scaled, 19, WHITE);
@@ -444,7 +446,8 @@ void screens::updateScreenSaver(char active_receiver, uint8_t rssi, uint8_t rssi
     display.fillRect(0, display.height()-19, 25, 19, WHITE);
     display.setCursor(1,display.height()-13);
     display.print(PSTR2("RSSI"));
-    #define RSSI_BAR_SIZE 101
+    //#define RSSI_BAR_SIZE 101
+    uint8_t RSSI_BAR_SIZE=101
     uint8_t rssi_scaled=map(rssi, 1, 100, 1, RSSI_BAR_SIZE);
     display.fillRect(25 + rssi_scaled, display.height()-19, (RSSI_BAR_SIZE-rssi_scaled), 19, BLACK);
     display.fillRect(25, display.height()-19, rssi_scaled, 19, WHITE);
@@ -494,7 +497,8 @@ void screens::diversity(uint8_t diversity_mode) {
 }
 
 void screens::updateDiversity(char active_receiver, uint8_t rssiA, uint8_t rssiB){
-    #define RSSI_BAR_SIZE 108
+    //#define RSSI_BAR_SIZE 108
+    uint8_t RSSI_BAR_SIZE=108
     uint8_t rssi_scaled=map(rssiA, 1, 100, 1, RSSI_BAR_SIZE);
 
     display.fillRect(18 + rssi_scaled, display.height()-19, (RSSI_BAR_SIZE-rssi_scaled), 7, BLACK);
