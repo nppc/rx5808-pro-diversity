@@ -34,6 +34,7 @@ SOFTWARE.
 
 #include <avr/pgmspace.h>
 #include <EEPROM.h>
+#include <SendOnlySoftwareSerial.h>
 
 #include "settings.h"
 
@@ -136,6 +137,11 @@ uint8_t rssi_setup_run=0;
 char call_sign[10];
 bool settings_beeps = true;
 bool settings_orderby_channel = true;
+
+#ifdef USE_IR_EMITTER
+    // Initialize Software Serial for TX only
+    SendOnlySoftwareSerial IRSerial (3); // Tx pin
+#endif
 
 // SETUP ----------------------------------------------------------------------------
 void setup()
@@ -240,7 +246,8 @@ void setup()
 
 #ifdef USE_IR_EMITTER
     // Used to Transmit IR Payloads
-    Serial.begin(9600);
+    // Serial.begin(9600);
+    IRSerial.begin(9600);
 #endif
 
 #ifdef USE_DIVERSITY
@@ -1090,18 +1097,18 @@ void sendIRPayload() {
     delay(100);
     beep(100);
     uint8_t check_sum = 2;
-    Serial.write(2); // start of payload STX
+    IRSerial.write(2); // start of payload STX
     check_sum += channelIndex;
-    Serial.write(channelIndex); // send channel
+    IRSerial.write(channelIndex); // send channel
     for(uint8_t i=0; i < 10;i++) {
         if(call_sign[i] == '\0') {
             break;
         }
         check_sum += (char)call_sign[i];
-        Serial.write(call_sign[i]); // send char of call_sign
+        IRSerial.write(call_sign[i]); // send char of call_sign
     }
-    Serial.write(3);  // end of payload ETX
-    Serial.write(check_sum); // send ceck_sum for payload validation
+    IRSerial.write(3);  // end of payload ETX
+    IRSerial.write(check_sum); // send ceck_sum for payload validation
 }
 #endif
 
