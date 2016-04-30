@@ -43,7 +43,7 @@ SOFTWARE.
 #define USE_DIVERSITY
 //#define USE_IR_EMITTER
 //#define USE_FLIP_SCREEN
-#define USE_BOOT_LOGO
+//#define USE_BOOT_LOGO
 
 // Receiver Module version
 // used for tuning time

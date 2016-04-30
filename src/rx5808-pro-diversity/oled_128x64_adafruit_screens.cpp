@@ -67,6 +67,8 @@ char screens::begin(const char *call_sign) {
     // init done
     reset();
 
+    display.setTextWrap(false);
+
     display.fillRect(0, 0, display.width(), 11,WHITE);
     display.setTextColor(BLACK);
     display.setCursor(((display.width() - (10*6)) / 2),2);
